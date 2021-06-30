@@ -88,3 +88,18 @@ class TweetDFTrain:
             model_data = {'X_train':X_train, 'X_valid':X_valid, 'y_train':y_train, 'y_valid':y_valid, 'model':model}
             models[key+'_model'] = model_data
         return models   
+
+def get_trained_models(df:pd.DataFrame,max_n_grams:int)->dict:
+    """
+    this function will vectorize, compute tf-id and train the models. It takes the processed data as a first argument 
+    and maximum n-grams as a secon argument
+
+    Return
+    ------
+    dictionary
+    """
+    models = TweetDFTrain(df,max_n_grams)
+    models.vectorize_data()
+    models.tf_id_data()
+    trained_models = models.train_model()
+    return trained_models
