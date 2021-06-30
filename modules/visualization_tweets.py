@@ -18,7 +18,7 @@ class TweetDfVisualization:
         
         if output:
             return f
-        plt.savefig('../img/wordcloud.png')
+        plt.savefig('wordcloud.png')
         #plt.show()
 
     def create_viz(self, output=False):
@@ -75,4 +75,4 @@ class TweetDfVisualization:
         #plt.show()
         if output:
             return fig
-        plt.savefig('../img/viz.png')
+        plt.savefig('viz.png')

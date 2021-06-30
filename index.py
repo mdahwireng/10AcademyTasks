@@ -45,10 +45,10 @@ print('\nCreating visualization for insight found in data')
 viz = TweetDfVisualization(cleaned_tweet)
 # create a wordcloud of most mentioned words
 viz.create_wordcloud()
-print('\nWordcloud visualization saved in img folder')
+print('\nWordcloud visualization saved in home directory')
 # create charts of the polarity and subjectivity of tweets
 viz.create_viz()
-print('\nPie chart and Bar Chart visualization saved in img folder')
+print('\nPie chart and Bar Chart visualization saved in home directory')
 
 # get a group of trained classifiers
 print('\nPreparing data for SGDClassifier training')
