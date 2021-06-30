@@ -11,11 +11,12 @@ from modules.train_tweet_model import get_trained_models
 from modules.model_evaluate import TweetDFModelEvaluate
 
 data_source = "./data/covid19.json"
-
+print('\nReading JSON data')
 # reading the data and putting the total number of entries (tweet_len) and data (tweet_list) in variables
 tweet_len, tweet_list = read_json(data_source)
 
 # creates an instance of TweetDfExtractor
+print('\nExtracting data in to tabels')
 tweet = TweetDfExtractor(tweet_list)
 # creates pandas dataframe using get_tweet_df method of TweetDfExtractor    
 tweet_df = tweet.get_tweet_df()         
@@ -23,27 +24,34 @@ tweet_df = tweet.get_tweet_df()
 # display information from the tweet data
 get_df_info(tweet_df)
 # get the cleaned data for visualization and model building
+print('\nCleanig Data')
 cleaned_tweet, data_for_model = get_cleaned_tweet_and_data_for_model(tweet_df)
 
 # create an imstance of TweetDFtopicModeling class
+print('\nCreating LDA model')
 model_topic = TweetDFTopicModeling(data_for_model)
 # prepare data for topic modeling
 model_topic.prepare_data()
 # create the topic modeling model
 lda = model_topic.creat_topic_model()
+print('LDA model created but canot be visualized here')
 # create the visualization of the model topics
-lda_viz = model_topic.viz_lda_topics(lda_model=lda)
+#lda_viz = model_topic.viz_lda_topics(lda_model=lda)
 # display the visualized topics from the topic modeling model
-lda_viz
+#lda_viz
 
 # create an instance of the TweetDfVisualization class
+print('\nCreating visualization for insight found in data')
 viz = TweetDfVisualization(cleaned_tweet)
 # create a wordcloud of most mentioned words
 viz.create_wordcloud()
+print('\nWordcloud visualization saved in img folder')
 # create charts of the polarity and subjectivity of tweets
 viz.create_viz()
+print('\nPie chart and Bar Chart visualization saved in img folder')
 
 # get a group of trained classifiers
+print('\nPreparing data for SGDClassifier training')
 models = get_trained_models(data_for_model, 3)
 
 # create an instance of TweetDFModelEvaluate
@@ -54,6 +62,7 @@ classifier_models.evaluate_model()
 classifier_model_dict = classifier_models.select_model()
 # get the selected model
 classifier_model = classifier_model_dict['model']
+print('\nSGDClasifier selected: ',classifier_model)
 # get the model name
 classifier_model_name = classifier_model_dict['name']
 # set the destination folder
@@ -64,3 +73,4 @@ filename = classifier_model_name + '.sav'
 address = destination_folder + '/' + filename
 # save the model
 pickle.dump(classifier_model, open(address, 'wb'))
+print('\nSGDClasifier pickeled and saved in model foder\nHave a nice time Classifying Tweets!!!')
