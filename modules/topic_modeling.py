@@ -53,7 +53,7 @@ class TweetDFTopicModeling:
                                            random_state=100,
                                            update_every=1,
                                            chunksize=50,
-                                           passes=100,
+                                           passes=50,
                                            alpha='auto',
                                            per_word_topics=True)
         self.model = lda_model
