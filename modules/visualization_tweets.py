@@ -9,16 +9,19 @@ class TweetDfVisualization:
         self.df = processedDf
         
     
-    def create_wordcloud(self):
+    def create_wordcloud(self, output=False):
         # Displays a figure of the most used words
-        plt.figure(figsize=(20, 10))
+        f=plt.figure(figsize=(20, 10))
         plt.imshow(WordCloud(width=1000,height=600,stopwords=STOPWORDS).generate(' '.join(self.df.cleaned_tweet.values)))
         plt.axis('off')
         plt.title('Most Frequent Words In Tweets',fontsize=16)
+        
+        if output:
+            return f
         plt.savefig('../img/wordcloud.png')
-        plt.show()
+        #plt.show()
 
-    def create_viz(self):
+    def create_viz(self, output=False):
         red='#FF5C5C'
         dark_green = '#00A300'
         yellow = '#FFC55C'
@@ -70,4 +73,6 @@ class TweetDfVisualization:
         axes[1,1].set(xlabel='Count', ylabel='Polarity')
 
         #plt.show()
+        if output:
+            return fig
         plt.savefig('../img/viz.png')
