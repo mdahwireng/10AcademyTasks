@@ -1,3 +1,4 @@
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
