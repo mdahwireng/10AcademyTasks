@@ -1,14 +1,14 @@
 import warnings
 warnings.filterwarnings('ignore')     # This prevents displays of warnings which can be a distruction to viewing outputs
-import pickle 
+import pickle
 
 #imports from local modules
-from extract_dataframe import read_json, TweetDfExtractor
-from preparation_tweets import get_df_info, get_cleaned_tweet_and_data_for_model
-from topic_modeling import TweetDFTopicModeling
-from visualization_tweets import TweetDfVisualization
-from train_tweet_model import get_trained_models
-from model_evaluate import TweetDFModelEvaluate
+from modules.extract_dataframe import read_json, TweetDfExtractor
+from modules.preparation_tweets import get_df_info, get_cleaned_tweet_and_data_for_model
+from modules.topic_modeling import TweetDFTopicModeling
+from modules.visualization_tweets import TweetDfVisualization
+from modules.train_tweet_model import get_trained_models
+from modules.model_evaluate import TweetDFModelEvaluate
 
 data_source = "./data/covid19.json"
 

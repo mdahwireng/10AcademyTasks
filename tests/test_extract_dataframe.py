@@ -1,11 +1,7 @@
 import unittest
 import pandas as pd
-import sys, os
-sys.path.append(os.path.abspath(os.path.join('..')))
 
-from extract_dataframe import read_json
-from extract_dataframe import TweetDfExtractor
-
+from modules.extract_dataframe import read_json, TweetDfExtractor
 _, tweet_list = read_json("data/covid19.json")
 
 columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
