@@ -16,15 +16,15 @@ class TweetDFTopicModeling:
     def __init__(self, df):
         self.data = df
         
-    def prepare_data(self)->None:
+    def prepare_data(self, data=None, output=False)->None:
         """
         this function will prepare data for creating topic modeling model 
         Return
         ------
         None
         """
-        
-        data = self.data
+        if data == None:
+            data = self.data
         #Converting tweets to list of words For feature engineering
         sentence_list = [remove_stopwords(tweet) for tweet in data['cleaned_tweet']]
         word_list = [sent.split() for sent in sentence_list]
@@ -35,6 +35,8 @@ class TweetDFTopicModeling:
         data = {'word_list':word_list, 'word_to_id':word_to_id, 'corpus':corpus_1 }
         
         self.data = data
+        if output:
+            return data
         
     def creat_topic_model (self)->dict:
         """
@@ -59,14 +61,21 @@ class TweetDFTopicModeling:
         self.model = lda_model
         return lda_model
     
-    def viz_lda_topics(self):
-        
-        data = self.data
-        lda_model = self.model
+    def viz_lda_topics(self, lda_model, data = None, streamlit=False):
+        if data == None:
+            data = self.data
         corpus = data['corpus']
         word_to_id = data['word_to_id']
+        
+        if streamlit:
+            LDAvis_prepared = gensimvis.prepare(lda_model, corpus, word_to_id)
+            html_string = pyLDAvis.prepared_data_to_html(LDAvis_prepared)
+            return html_string
+        
         # Visualize the topics
         pyLDAvis.enable_notebook()
 
         LDAvis_prepared = gensimvis.prepare(lda_model, corpus, word_to_id)
         return LDAvis_prepared
+        
+        

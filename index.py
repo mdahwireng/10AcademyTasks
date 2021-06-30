@@ -32,7 +32,7 @@ model_topic.prepare_data()
 # create the topic modeling model
 lda = model_topic.creat_topic_model()
 # create the visualization of the model topics
-lda_viz = model_topic.viz_lda_topics()
+lda_viz = model_topic.viz_lda_topics(lda_model=lda)
 # display the visualized topics from the topic modeling model
 lda_viz
 
